@@ -9,6 +9,7 @@ const bodyParser = require('body-parser')
 
 const indexRouter = require('./routes/index')
 const authorRouter = require('./routes/authors') //makes the connection to authros.js
+const bookRouter = require('./routes/books')
 
 app.set('view engine', 'ejs') //ejs is the view engine
 app.set('views', __dirname + '/views') //accesses the views folder
@@ -18,7 +19,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
 
 const mongoose = require('mongoose') //npm i mongoose first
-mongoose.connect(process.env.DATABASE_URL, { 
+mongoose.connect(process.env.DATABASE_URL, { //hidden without .env in mongoose. you can just manually set keys. Also, .env must be npm i envdot
     useNewUrlParser: true, 
     useUnifiedTopology: true })
 
@@ -29,6 +30,7 @@ db.once('open', () => console.log('Connected to Mongoose'))
 
 app.use('/', indexRouter)
 app.use('/authors', authorRouter) //this prefixes everything in authors.js
+app.use('/books', bookRouter)
 
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000) //confused why this works on Heroku...
