@@ -1,7 +1,6 @@
 .env
 node_modules
 
-public/uploads
 
 # Logs
 logs
