@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Author = require('../models/author')
+const Book = require('../models/book')
 
 //Everything in here is prefixed with authors/ because in server.js we created an authors/ route and used it linking up to this file
 
@@ -38,14 +39,76 @@ router.post('/', async (req, res) =>{
     try {
     //populates newAuthor AFTER its saved
         const newAuthor = await author.save()  
-        //res.redirect(`authors/${newAuthor.id}`)
-        res.redirect(`authors`)
+        res.redirect(`authors/${newAuthor.id}`)
     } catch {
         //this allows the input field to already be populated with what they TRIED to type
         res.render('authors/new', {
             author: author,
             errorMessage: 'Error creating Author'
         })
+    }
+})
+
+//this get has to come AFTER /new otherwise, it will assume that "new" is the id
+router.get('/:id', async (req, res) => {
+    try{
+        const author = await Author.findById(req.params.id)
+        const books = await Book.find({ author: author.id }).limit(6).exec()
+        res.render('authors/show', {
+            author: author,
+            booksByAuthor: books
+        })
+    } catch {
+        res.redirect('/')
+    }
+})
+
+router.get('/:id/edit', async (req,res) => {
+    try{
+        const author = await Author.findById(req.params.id)
+        res.render('authors/edit', { author: author})
+    } catch {
+        res.redirect('/authors')
+    }
+
+
+})
+
+router.put('/:id', async (req,res) => {
+    let author
+    try {
+        author = await Author.findById(req.params.id)
+        author.name = req.body.name
+        await author.save()  
+        res.redirect(`/authors/${author.id}`)
+    
+    } catch {
+        if(author == null) {
+            res.redirect('/')
+        } else {
+            res.render('authors/edit', {
+                author: author,
+                errorMessage: 'Error updating Author'
+            })
+        }
+        
+    }
+})
+
+router.delete('/:id', async(req, res) => {
+    let author
+    try {
+        author = await Author.findById(req.params.id)
+        await author.remove()  
+        res.redirect('/authors')
+    
+    } catch {
+        if(author == null) {
+            res.redirect('/')
+        } else {
+            res.redirect(`/authors/${author.id}`)
+        }
+        
     }
 })
 
