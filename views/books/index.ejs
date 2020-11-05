@@ -23,8 +23,10 @@
 
 <div>
     <% books.forEach(book => { %>
-        <!--book.coverImagePath comes from the book model-->
-       <img height="150" width="100" src="<%=book.coverImagePath%>">
+        <a href="/books/<%= book.id %>">
+            <!--book.coverImagePath comes from the book model-->
+            <img height="150" width="100" src="<%=book.coverImagePath%>">
+        </a>
     <% }) %>
 </div>
 <br>
