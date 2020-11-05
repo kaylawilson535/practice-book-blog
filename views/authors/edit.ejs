@@ -3,8 +3,11 @@
 <!-- can only use post in forms! -->
 <form action="/authors/<%= author.id %>?_method=PUT" method="POST">
     <%- include('_form_fields') %>
-    <a href="/authors/<%= author.id %>">Cancel</a>
-    <button  class="btn btn-primary"type="submit">Update</button>
+    <div class="form-row form-row-end btn-row">
+        <a class="btn btn-danger" href="/authors/<%= author.id %>">Cancel</a>
+        <button class="btn btn-primary"type="submit">Update</button>
+    </div>
+    
 
     <!-- a tags are used for links, buttons are used for interacting with the form-->
 </form>
