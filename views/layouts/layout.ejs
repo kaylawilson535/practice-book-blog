@@ -14,29 +14,25 @@
         <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
         
         <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+        
 
     <script defer src="/javascripts/fileUpload.js"></script>
+
+    <link rel="stylesheet" href="/stylesheets/main.css">
+
     <title>Mybrary</title>
 </head>
-<body style="
-    background-color: #495464; 
-    color: #e8e8e8;
-    height: 100%;
-    ">
+<body>
 
-    <%- include('../partials/header.ejs') %>
-    <%- include('../partials/errorMessage.ejs') %>
-    <%- body %>
-
-
-    <footer style="
-        display: absolute;
-        bottom: 0;
-        font-size: .5rem;
-        color: #bbbfca;
-        text-align: center;
-        padding-top: 5rem;
-    ">
+    <div class="container">
+        <%- include('../partials/header.ejs') %>
+        <div class="inner-container">
+            <%- include('../partials/errorMessage.ejs') %>
+            <%- body %>
+        </div>
+    </div>
+   
+    <footer>
         Coded by Kayla Wilson, Tutorial by WebDevSimplified
     </footer>
 

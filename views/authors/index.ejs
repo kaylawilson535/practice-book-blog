@@ -1,4 +1,4 @@
-<h2>Search Authors</h2>
+<h2  class="page-header">Search Authors</h2>
 
 <form action="/authors" method="GET">
 
@@ -11,10 +11,14 @@
 <br>
 <% authors.forEach(author => { %>
     <div> <%= author.name %> </div>
-    <a href="/authors/<%= author.id %>">View</a>
-    <a href="/authors/<%= author.id %>/edit">Edit</a>
-    <!--if you use a get request to delete, google web scraper will come in and view every get request essentially deleting it. this is the tricky solution -->
-    <%- include('../partials/deleteForm', 
-                { url: `/authors/${author.id}` }) %>
 
+    <div class="btn-row">
+        <a class="btn btn-primary" href="/authors/<%= author.id %>">View</a>
+        <a class="btn btn-primary" href="/authors/<%= author.id %>/edit">Edit</a>
+        <!--if you use a get request to delete, google web scraper will come in and view every get request essentially deleting it. this is the tricky solution -->
+        <%- include('../partials/deleteForm', 
+                    { url: `/authors/${author.id}` }) %>
+    
+    </div>
+   
 <% }) %>

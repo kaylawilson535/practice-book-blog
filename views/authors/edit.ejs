@@ -1,10 +1,10 @@
-<h2> Edit Author </h2>
+<h2  class="page-header"> Edit Author </h2>
 
 <!-- can only use post in forms! -->
 <form action="/authors/<%= author.id %>?_method=PUT" method="POST">
     <%- include('_form_fields') %>
     <a href="/authors/<%= author.id %>">Cancel</a>
-    <button type="submit">Update</button>
+    <button  class="btn btn-primary"type="submit">Update</button>
 
     <!-- a tags are used for links, buttons are used for interacting with the form-->
 </form>
